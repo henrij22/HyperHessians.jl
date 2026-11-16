@@ -165,7 +165,11 @@ end
         @test precision(H; base = 10) == precision(T; base = 10)
         @test floatmin(H) == floatmin(T) && floatmax(H) == floatmax(T)
         @test typemin(H) == typemin(T) && typemax(H) == typemax(T)
-        @test floatmin(H) isa H && typemax(H) isa H
+        @test floatmin(h) == floatmin(T) && floatmax(h) == floatmax(T)
+        @test typemin(h) == typemin(T) && typemax(h) == typemax(T)
+        @test maxintfloat(H) == maxintfloat(T) && maxintfloat(h) == maxintfloat(T)
+        @test eps(H) isa T && floatmin(H) isa T
+        @test !issubnormal(h) && issubnormal(H(floatmin(T) / 2))
         @test Base.rtoldefault(H) == Base.rtoldefault(T)
     end
     h = HyperDual(1.0, (2.0,), (3.0,), ((4.0,),))
